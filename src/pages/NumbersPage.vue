@@ -11,7 +11,8 @@
     </div>
 
     <div class="grid">
-      <GameCard v-for="it in nums" :key="it.id" :emoji="it.emoji" :big="it.big" :active="activeId===it.id" @pick="pick(it)" />
+      <GameCard v-for="it in nums" :key="it.id" :emoji="it.emoji" :big="it.big" :active="activeId === it.id"
+        @pick="pick(it)" />
     </div>
 
     <div class="game">
@@ -54,10 +55,35 @@ const baseAudio = "/MP4/"
 const startAudio = 30
 const srcOf = (n) => baseAudio + n + ".ogg"
 
-const nums = ref(Array.from({ length: 20 }, (_, i) => {
-  const n = i + 1
-  return { id: "n" + n, big: String(n), emoji: n <= 10 ? "🫧" : "⭐", dots: n, audio: startAudio + (n - 1) }
-}))
+const icons = {
+  1: "⚽",
+  2: "👀",
+  3: "🔺",
+  4: "🪑",
+  5: "🖐️",
+  6: "🐞",
+  7: "🌈",
+  8: "🐙",
+  9: "🎯",
+  10: "🖐️🖐️"
+}
+
+
+const nums = ref(
+  Array.from({ length: 10 }, (_, i) => {
+    const n = i + 1
+    return {
+      id: "n" + n,
+      big: String(n),
+      emoji: icons[n],
+      dots: n,
+      audio: startAudio + (n - 1)
+    }
+  })
+)
+
+
+
 
 const activeId = ref(null)
 const playingAll = ref(false)
@@ -83,7 +109,7 @@ const shuffle = (a) => {
   const x = a.slice()
   for (let i = x.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
-    ;[x[i], x[j]] = [x[j], x[i]]
+      ;[x[i], x[j]] = [x[j], x[i]]
   }
   return x
 }
@@ -119,61 +145,152 @@ onMounted(() => makeRound())
 </script>
 
 <style scoped>
-.page{display:grid;gap:14px}
-.hero{
-  display:flex;align-items:center;justify-content:space-between;gap:12px;
-  padding:14px;border-radius:24px;
+.page {
+  display: grid;
+  gap: 14px
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 24px;
   background: color-mix(in oklab, var(--card) 80%, transparent);
-  border:1px solid var(--brd);
+  border: 1px solid var(--brd);
   box-shadow: var(--shadowM);
 }
-.hTitle{font-weight:900;font-size:22px}
-.hSub{opacity:.8;font-size:13px}
-.playAll{
-  display:flex;gap:10px;align-items:center;
-  padding:12px 14px;border-radius:18px;
-  border:1px solid var(--brd);
+
+.hTitle {
+  font-weight: 900;
+  font-size: 22px
+}
+
+.hSub {
+  opacity: .8;
+  font-size: 13px
+}
+
+.playAll {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid var(--brd);
   background: linear-gradient(135deg, #00bbf9, #9b5de5, #ff4d6d);
-  color:white;font-weight:900;
-  box-shadow: 0 18px 45px rgba(0,0,0,.22);
+  color: white;
+  font-weight: 900;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
 }
-.grid{display:grid;gap:12px;grid-template-columns: repeat(2, minmax(0,1fr));}
-@media (min-width:520px){.grid{grid-template-columns: repeat(4, minmax(0,1fr));}}
-@media (min-width:900px){.grid{grid-template-columns: repeat(6, minmax(0,1fr));}}
-.game{
-  padding:14px;border-radius:26px;
+
+.grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width:520px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width:900px) {
+  .grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+}
+
+.game {
+  padding: 14px;
+  border-radius: 26px;
   background: color-mix(in oklab, var(--card) 82%, transparent);
-  border:1px solid var(--brd);
+  border: 1px solid var(--brd);
   box-shadow: var(--shadowM);
-  display:grid;gap:12px;
+  display: grid;
+  gap: 12px;
 }
-.gTop{display:flex;justify-content:space-between;align-items:center}
-.gTitle{font-weight:900}
-.lvl{opacity:.85}
-.prompt{display:grid;place-items:center;padding:6px}
-.bigBtn{
-  width:min(320px, 100%);
-  padding:16px 16px;border-radius:22px;
-  border:1px solid var(--brd);
+
+.gTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.gTitle {
+  font-weight: 900
+}
+
+.lvl {
+  opacity: .85
+}
+
+.prompt {
+  display: grid;
+  place-items: center;
+  padding: 6px
+}
+
+.bigBtn {
+  width: min(320px, 100%);
+  padding: 16px 16px;
+  border-radius: 22px;
+  border: 1px solid var(--brd);
   background: linear-gradient(135deg, #ffb703, #00bbf9);
-  color:white;font-weight:900;
-  display:flex;gap:12px;align-items:center;justify-content:center;
+  color: white;
+  font-weight: 900;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
 }
-.ico{font-size:22px}
-.choices{display:grid;gap:12px;grid-template-columns: repeat(2, minmax(0,1fr));}
-@media (min-width:520px){.choices{grid-template-columns: repeat(3, minmax(0,1fr));}}
-.choice{
-  border-radius:22px;padding:12px;
+
+.ico {
+  font-size: 22px
+}
+
+.choices {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (min-width:520px) {
+  .choices {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.choice {
+  border-radius: 22px;
+  padding: 12px;
   background: color-mix(in oklab, var(--card) 86%, transparent);
-  border:1px solid var(--brd);
+  border: 1px solid var(--brd);
   box-shadow: var(--shadowS);
-  display:grid;gap:10px;justify-items:center;
+  display: grid;
+  gap: 10px;
+  justify-items: center;
 }
-.dots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
-.dot{
-  width:14px;height:14px;border-radius:999px;
+
+.dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
   background: linear-gradient(135deg, #ff4d6d, #00bbf9);
-  box-shadow:0 10px 18px rgba(0,0,0,.14);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .14);
 }
-.label{font-weight:900;font-size:22px}
+
+.label {
+  font-weight: 900;
+  font-size: 22px
+}
 </style>

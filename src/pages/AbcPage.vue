@@ -59,8 +59,8 @@ const { play, playSequence } = useAudio()
 const { addCoins } = useCoins()
 
 const letters = ref([
-  { id:"a", big:"A", small:"Olma", img:"https://openmoji.org/data/color/svg/1F34E.svg", audio:1 },
-  { id:"b", big:"B", small:"Bol", img:"https://openmoji.org/data/color/svg/1F37D.svg", audio:2 },
+  { id:"a", big:"A", small:"Apelsin", img:"https://openmoji.org/data/color/svg/1F34A.svg", audio:1 },
+  { id:"b", big:"B", small:"Baliq", img:"https://openmoji.org/data/color/svg/1F41F.svg", audio:2 },
   { id:"d", big:"D", small:"Daraxt", img:"https://openmoji.org/data/color/svg/1F333.svg", audio:3 },
   { id:"e", big:"E", small:"Eshik", img:"https://openmoji.org/data/color/svg/1F6AA.svg", audio:4 },
   { id:"f", big:"F", small:"Futbol", img:"https://openmoji.org/data/color/svg/26BD.svg", audio:5 },

@@ -51,7 +51,7 @@ const { play, playSequence } = useAudio()
 const { addCoins } = useCoins()
 
 const baseAudio = "/MP4/"
-const startAudio = 60
+const startAudio = 50
 const srcOf = (n) => baseAudio + n + ".ogg"
 
 const colors = ref([
