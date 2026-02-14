@@ -79,14 +79,14 @@ const letters = ref([
   { id:"t", big:"T", small:"Telefon", img:"https://openmoji.org/data/color/svg/1F4F1.svg", audio:18 },
   { id:"u", big:"U", small:"Uzuk", img:"https://openmoji.org/data/color/svg/1F48D.svg", audio:19 },
   { id:"v", big:"V", small:"Velosiped", img:"https://openmoji.org/data/color/svg/1F6B2.svg", audio:20 },
-  { id:"y", big:"Y", small:"Yulduz", img:"https://openmoji.org/data/color/svg/2B50.svg", audio:21 },
-  { id:"z", big:"Z", small:"Zebra", img:"https://openmoji.org/data/color/svg/1F993.svg", audio:22 },
-  { id:"sh", big:"SH", small:"Shar", img:"https://openmoji.org/data/color/svg/1F388.svg", audio:23 },
-  { id:"ch", big:"CH", small:"Choynak", img:"https://openmoji.org/data/color/svg/1FAD6.svg", audio:24 },
-  { id:"o2", big:"O‘", small:"O‘rdak", img:"https://openmoji.org/data/color/svg/1F986.svg", audio:25 },
-  { id:"g2", big:"G‘", small:"G‘oz", img:"https://openmoji.org/data/color/svg/1FABF.svg", audio:26 },
-  { id:"q", big:"Q", small:"Qush", img:"https://openmoji.org/data/color/svg/1F426.svg", audio:27 },
-  { id:"x", big:"X", small:"Xarita", img:"https://openmoji.org/data/color/svg/1F5FA.svg", audio:28 },
+  { id:"x", big:"X", small:"Xarita", img:"https://openmoji.org/data/color/svg/1F5FA.svg", audio:21 },
+  { id:"y", big:"Y", small:"Yulduz", img:"https://openmoji.org/data/color/svg/2B50.svg", audio:22 },
+  { id:"z", big:"Z", small:"Zebra", img:"https://openmoji.org/data/color/svg/1F993.svg", audio:23 },
+  { id:"sh", big:"SH", small:"Shar", img:"https://openmoji.org/data/color/svg/1F388.svg", audio:24 },
+  { id:"ch", big:"CH", small:"Choynak", img:"https://openmoji.org/data/color/svg/1FAD6.svg", audio:25 },
+  { id:"o2", big:"O‘", small:"O‘rdak", img:"https://openmoji.org/data/color/svg/1F986.svg", audio:26 },
+  { id:"g2", big:"G‘", small:"G‘oz", img:"https://openmoji.org/data/color/svg/1FABF.svg", audio:27 },
+  { id:"q", big:"Q", small:"Qush", img:"https://openmoji.org/data/color/svg/1F426.svg", audio:28 },
   { id:"ng", big:"NG", small:"Nongul", img:"https://openmoji.org/data/color/svg/1F33A.svg", audio:29 }
 ])
 
