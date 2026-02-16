@@ -1,80 +1,147 @@
 <template>
-  <header class="topbar">
-    <button class="iconbtn" @click="$emit('toggleTheme')" aria-label="Theme">
-      <span class="i">{{ theme === "dark" ? "🌙" : "☀️" }}</span>
-    </button>
-
-    <div class="brand" aria-label="ABC BOLALAR">
-      <div class="title">ABC BOLALAR</div>
-      <div class="spark" aria-hidden="true">
-        <span>🎈</span><span>✨</span><span>🧸</span><span>🌈</span>
-      </div>
+  <header class="top">
+    <div class="left">
+      <h1 class="logo">🎨 ABC BOLALAR</h1>
     </div>
 
     <div class="right">
-      <div class="coins" aria-label="Coins">
-        <span class="coin">🪙</span>
-        <span class="num" id="coinCounter">{{ coins }}</span>
+      <!-- Coins o'rniga Level Progress -->
+      <div class="level-display">
+        <div class="level-info">
+          <span class="level-badge">⭐ {{ levelText }}</span>
+          <span class="xp-text">{{ xp }} / {{ xpRequired }} XP</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" :style="{ width: progress + '%' }"></div>
+        </div>
       </div>
+
+      <button class="theme-btn" @click="$emit('toggleTheme')"
+        :aria-label="theme === 'dark' ? 'Light mode' : 'Dark mode'">
+        {{ theme === 'dark' ? '☀️' : '🌙' }}
+      </button>
     </div>
   </header>
 </template>
 
 <script setup>
-defineProps({ theme: String, coins: Number, cartCount: Number })
-defineEmits(["toggleTheme"])
+import { inject } from 'vue'
+
+defineProps(['theme'])
+defineEmits(['toggleTheme'])
+
+const { level, xp, xpRequired, progress, levelText } = inject('level')
 </script>
 
 <style scoped>
-.topbar{
-  position:sticky;top:0;z-index:50;
-  display:grid;grid-template-columns:56px 1fr 130px;
-  align-items:center;gap:10px;
-  padding:10px 12px;
-  backdrop-filter: blur(14px);
-  background: color-mix(in oklab, var(--card) 70%, transparent);
-  border-bottom:1px solid var(--brd);
-}
-.iconbtn{
-  width:48px;height:48px;border-radius:16px;
-  background:var(--card);border:1px solid var(--brd);
-  display:grid;place-items:center;
+.top {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--brd);
   box-shadow: var(--shadowS);
 }
-.iconbtn:active{transform:scale(.98)}
-.brand{display:grid;justify-items:center;gap:2px}
-.title{
-  font-weight:900;letter-spacing:.6px;
-  font-size:20px;line-height:1;
-  background: linear-gradient(90deg, #ff4d6d, #ffb703, #00bbf9, #9b5de5);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  text-shadow:0 10px 30px color-mix(in oklab, var(--glow) 50%, transparent);
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-.spark{display:flex;gap:6px;font-size:14px;opacity:.95}
-.right{display:flex;justify-content:flex-end;gap:10px;align-items:center}
-.coins{
-  display:flex;gap:8px;align-items:center;
-  padding:10px 12px;border-radius:16px;
-  background:var(--card);border:1px solid var(--brd);
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.level-display {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 180px;
+}
+
+.level-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.level-badge {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--acc2);
+}
+
+.xp-text {
+  font-size: 0.85rem;
+  color: var(--mut);
+  font-weight: 600;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--brd);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc2));
+  border-radius: 999px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--glow);
+}
+
+.theme-btn {
+  padding: 10px;
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  transition: all 0.3s;
+}
+
+.theme-btn:hover {
+  transform: scale(1.1) rotate(20deg);
   box-shadow: var(--shadowS);
-  min-width:86px;justify-content:center;
 }
-.coin{filter:drop-shadow(0 10px 16px rgba(0,0,0,.18))}
-.num{font-weight:900}
-.cart{
-  width:48px;height:48px;border-radius:16px;
-  background:var(--card);border:1px solid var(--brd);
-  display:grid;place-items:center;position:relative;
-  box-shadow: var(--shadowS);
-  text-decoration:none;color:inherit;
+
+@media (max-width: 640px) {
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .level-display {
+    min-width: 140px;
+  }
+
+  .level-badge {
+    font-size: 0.95rem;
+  }
+
+  .xp-text {
+    font-size: 0.75rem;
+  }
 }
-.badge{
-  position:absolute;top:-6px;right:-6px;
-  min-width:22px;height:22px;border-radius:999px;
-  display:grid;place-items:center;
-  font-weight:900;font-size:12px;
-  background: #ff4d6d;color:white;
-  border:2px solid color-mix(in oklab, var(--card) 80%, transparent);
-}
-.i{font-size:20px}
 </style>

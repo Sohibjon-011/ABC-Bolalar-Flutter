@@ -17,7 +17,7 @@
 
     <div class="game">
       <div class="gTop">
-        <div class="gTitle">🎮 Hayvon o‘yini</div>
+        <div class="gTitle">🎮 Hayvon o'yini</div>
         <div class="lvl">Bosqich: <b>{{ level }}</b>/10</div>
       </div>
 
@@ -42,12 +42,12 @@
 import { inject, onMounted, ref } from "vue"
 import GameCard from "../components/GameCard.vue"
 import { useAudio } from "../composables/useAudio"
-import { useCoins } from "../composables/useCoins"
+import { useLevel } from "../composables/useLevel"
 
 const emit = defineEmits(["toast"])
 const fx = inject("fx")
 const { play, playSequence } = useAudio()
-const { addCoins } = useCoins()
+const { addXP } = useLevel()
 
 const baseAudio = "/MP4/"
 const startAudio = 50
@@ -99,6 +99,10 @@ const makeRound = () => {
   const k = Math.min(2 + Math.floor(level.value / 2), 5)
   const set = shuffle(animals.value).slice(0, k)
   const ans = set[Math.floor(Math.random() * set.length)]
+  
+  console.log('📝 Yangi savol (hayvon):', ans.emoji)
+  console.log('Variantlar:', set.map(x => x.emoji).join(' '))
+  
   promptId.value = ans.id
   choices.value = shuffle(set)
 }
@@ -110,18 +114,51 @@ const speakPrompt = async () => {
 }
 
 const choose = async (c) => {
+  console.log('🎯 Tanlangan:', c.emoji, '| To\'g\'ri javob:', animals.value.find(x => x.id === promptId.value)?.emoji)
+  
   if (c.id === promptId.value) {
-    emit("toast", "🎉", "+" + level.value + " tanga")
-    addCoins(level.value)
-    if (level.value < 10) level.value++
+    // To'g'ri javob
+    console.log('✅ TO\'G\'RI JAVOB!')
+    const xpReward = level.value * 10
+    
+    emit("toast", "🎉", `+${xpReward} XP olindi!`)
+    addXP(xpReward)
+    
+    // Effekt (agar mavjud bo'lsa)
+    try {
+      if (fx?.value && typeof fx.value.victory === 'function') {
+        fx.value.victory()
+      }
+    } catch (err) {
+      console.log('FX effekt xatosi (muammo emas):', err.message)
+    }
+    
+    // Keyingi bosqichga o'tish
+    if (level.value < 10) {
+      level.value++
+      console.log('📈 Yangi bosqich:', level.value)
+    } else {
+      console.log('🏆 10 bosqich tugallandi!')
+      emit("toast", "🏆", "10 bosqich tugallandi!")
+      level.value = 1
+    }
+    
+    // MUHIM: Yangi savol yaratish
+    console.log('🔄 makeRound() chaqirilmoqda...')
     makeRound()
+    
   } else {
-    emit("toast", "😺", "Yana bir bor!")
+    // Noto'g'ri javob
+    console.log('❌ NOTO\'G\'RI JAVOB')
+    emit("toast", "😺", "Yana bir bor urinib ko'ring!")
     await speakPrompt()
   }
 }
 
-onMounted(() => makeRound())
+onMounted(() => {
+  console.log('🐾 Hayvonlar o\'yini boshlandi!')
+  makeRound()
+})
 </script>
 
 <style scoped>
@@ -163,6 +200,17 @@ onMounted(() => makeRound())
   color: white;
   font-weight: 900;
   box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.playAll:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+
+.playAll:disabled {
+  opacity: .6;
+  cursor: not-allowed;
 }
 
 .grid {
@@ -225,6 +273,16 @@ onMounted(() => makeRound())
   gap: 12px;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bigBtn:hover {
+  transform: scale(1.05);
+}
+
+.bigBtn:active {
+  transform: scale(0.98);
 }
 
 .ico {
@@ -252,6 +310,17 @@ onMounted(() => makeRound())
   display: grid;
   gap: 10px;
   justify-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.choice:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadowM);
+}
+
+.choice:active {
+  transform: translateY(0);
 }
 
 .choice img {
@@ -263,6 +332,6 @@ onMounted(() => makeRound())
 
 .label {
   font-weight: 900;
-  font-size: 18px
+  font-size: 28px;
 }
 </style>

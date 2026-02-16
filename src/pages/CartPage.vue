@@ -51,7 +51,7 @@
 
 <script setup>
 import { computed } from "vue"
-import { useCoins } from "../composables/useCoins"
+import { useLevel } from "../composables/useLevel"
 
 const emit = defineEmits(["toast"])
 const { cart, removeFromCart, checkout, purchased } = useCoins()
