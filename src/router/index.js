@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from "vue-router"
+import { createRouter, createWebHashHistory } from "vue-router"
 import AbcPage from "../pages/AbcPage.vue"
 import NumbersPage from "../pages/NumbersPage.vue"
 import ColorsPage from "../pages/ColorsPage.vue"
@@ -6,7 +6,7 @@ import AnimalsPage from "../pages/AnimalsPage.vue"
 import CartPage from "../pages/CartPage.vue"
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes: [
     { path: "/", redirect: "/abc" },
     { path: "/abc", component: AbcPage },
@@ -20,6 +20,10 @@ const router = createRouter({
   }
 })
 
-
+router.afterEach((to) => {
+  window.gtag && window.gtag('config', 'G-0FBG2DFNKR', {
+    page_path: to.fullPath
+  })
+})
 
 export default router
