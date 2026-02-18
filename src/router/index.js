@@ -5,7 +5,7 @@ import ColorsPage from "../pages/ColorsPage.vue"
 import AnimalsPage from "../pages/AnimalsPage.vue"
 import CartPage from "../pages/CartPage.vue"
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes: [
     { path: "/", redirect: "/abc" },
@@ -25,3 +25,5 @@ router.afterEach((to) => {
     page_path: to.fullPath
   })
 })
+
+export default router
