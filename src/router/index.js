@@ -20,10 +20,6 @@ const router = createRouter({
   }
 })
 
-router.afterEach((to) => {
-  window.gtag && window.gtag('config', 'G-0FBG2DFNKR', {
-    page_path: to.fullPath
-  })
-})
+
 
 export default router
