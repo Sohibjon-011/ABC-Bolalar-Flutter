@@ -11,8 +11,8 @@
     </div>
 
     <div class="grid">
-      <GameCard v-for="(it, idx) in letters" :key="it.id" :img="it.img" :emoji="it.emoji" :big="it.big" :small="it.small"
-        :active="activeId === it.id" @pick="pick(it, idx)" />
+      <GameCard v-for="(it, idx) in letters" :key="it.id" :img="it.img" :emoji="it.emoji" :big="it.big"
+        :small="it.small" :active="activeId === it.id" @pick="pick(it, idx)" />
     </div>
 
     <div class="game">
@@ -66,6 +66,7 @@ const letters = ref([
   { id: "n", big: "N", small: "Non", img: "https://openmoji.org/data/color/svg/1F35E.svg", audio: 13 },
   { id: "o", big: "O", small: "Oy", img: "https://openmoji.org/data/color/svg/1F319.svg", audio: 14 },
   { id: "p", big: "P", small: "Poyezd", img: "https://openmoji.org/data/color/svg/1F686.svg", audio: 15 },
+  { id: "q", big: "Q", small: "Qush", img: "https://openmoji.org/data/color/svg/1F426.svg", audio: 28 },
   { id: "r", big: "R", small: "Raketa", img: "https://openmoji.org/data/color/svg/1F680.svg", audio: 16 },
   { id: "s", big: "S", small: "Sut", img: "https://openmoji.org/data/color/svg/1F95B.svg", audio: 17 },
   { id: "t", big: "T", small: "Telefon", img: "https://openmoji.org/data/color/svg/1F4F1.svg", audio: 18 },
@@ -74,12 +75,11 @@ const letters = ref([
   { id: "x", big: "X", small: "Xarita", img: "https://openmoji.org/data/color/svg/1F5FA.svg", audio: 21 },
   { id: "y", big: "Y", small: "Yulduz", img: "https://openmoji.org/data/color/svg/2B50.svg", audio: 22 },
   { id: "z", big: "Z", small: "Zebra", img: "https://openmoji.org/data/color/svg/1F993.svg", audio: 23 },
-  { id: "sh", big: "SH", small: "Shar", img: "https://openmoji.org/data/color/svg/1F388.svg", audio: 24 },
-  { id: "ch", big: "CH", small: "Choynak", img: "https://openmoji.org/data/color/svg/1FAD6.svg", audio: 25 },
   { id: "o2", big: "O'", small: "O'rdak", img: "https://openmoji.org/data/color/svg/1F986.svg", audio: 26 },
   { id: "g2", big: "G'", small: "G'oz", img: "https://openmoji.org/data/color/svg/1FABF.svg", audio: 27 },
-  { id: "q", big: "Q", small: "Qush", img: "https://openmoji.org/data/color/svg/1F426.svg", audio: 28 },
-  { id: "ng", big: "NG", small: "Nongul", img: "https://openmoji.org/data/color/svg/1F33A.svg", audio: 29 }
+  { id: "sh", big: "SH", small: "Shar", img: "https://openmoji.org/data/color/svg/1F388.svg", audio: 24 },
+  { id: "ch", big: "CH", small: "Choynak", img: "https://openmoji.org/data/color/svg/1FAD6.svg", audio: 25 },
+  { id: "ng", big: "NG", small: "Bodring", img: "https://openmoji.org/data/color/svg/1F952.svg", audio: 29 }
 ])
 
 const baseAudio = "/MP4/"
@@ -120,10 +120,10 @@ const makeRound = () => {
   const pool = shuffle(letters.value)
   const set = pool.slice(0, k)
   const ans = set[Math.floor(Math.random() * set.length)]
-  
+
   console.log('📝 Yangi savol yaratildi:', ans.big, '-', ans.small)
   console.log('Variantlar:', set.map(x => x.big).join(', '))
-  
+
   promptId.value = ans.id
   choices.value = shuffle(set)
 }
@@ -136,7 +136,7 @@ const speakPrompt = async () => {
 
 const choose = async (c) => {
   console.log('🎯 Tanlangan:', c.big, '| To\'g\'ri javob:', letters.value.find(x => x.id === promptId.value)?.big)
-  
+
   if (c.id === promptId.value) {
     // To'g'ri javob
     console.log('✅ TO\'G\'RI JAVOB!')
@@ -164,11 +164,11 @@ const choose = async (c) => {
       emit("toast", "🏆", "10 bosqich tugallandi!")
       level.value = 1
     }
-    
+
     // MUHIM: Yangi savol yaratish
     console.log('🔄 makeRound() chaqirilmoqda...')
     makeRound()
-    
+
   } else {
     // Noto'g'ri javob
     console.log('❌ NOTO\'G\'RI JAVOB')

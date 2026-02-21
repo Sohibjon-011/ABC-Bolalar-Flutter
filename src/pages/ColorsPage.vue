@@ -55,15 +55,15 @@ const startAudio = 40
 const srcOf = (n) => baseAudio + n + ".ogg"
 
 const colors = ref([
-  { id: "red", emoji: "🔴", hex: "#ff4d6d", audio: startAudio + 0 },
-  { id: "blue", emoji: "🔵", hex: "#00bbf9", audio: startAudio + 1 },
-  { id: "yellow", emoji: "🟡", hex: "#ffb703", audio: startAudio + 2 },
-  { id: "green", emoji: "🟢", hex: "#2ec4b6", audio: startAudio + 3 },
+  { id: "red", emoji: "🔴", hex: "#ff1100", audio: startAudio + 0 },
+  { id: "blue", emoji: "🔵", hex: "#2986cc", audio: startAudio + 1 },
+  { id: "yellow", emoji: "🟡", hex: "#ffc000", audio: startAudio + 2 },
+  { id: "green", emoji: "🟢", hex: "#03ff00", audio: startAudio + 3 },
   { id: "purple", emoji: "🟣", hex: "#9b5de5", audio: startAudio + 4 },
   { id: "orange", emoji: "🟠", hex: "#fb8500", audio: startAudio + 5 },
   { id: "pink", emoji: "💗", hex: "#ff7aa2", audio: startAudio + 6 },
-  { id: "brown", emoji: "🟤", hex: "#a47148", audio: startAudio + 7 },
-  { id: "black", emoji: "⚫", hex: "#111827", audio: startAudio + 8 },
+  { id: "brown", emoji: "🟤", hex: "#744700", audio: startAudio + 7 },
+  { id: "black", emoji: "⚫", hex: "#000000", audio: startAudio + 8 },
   { id: "white", emoji: "⚪", hex: "#f8fafc", audio: startAudio + 9 }
 ])
 

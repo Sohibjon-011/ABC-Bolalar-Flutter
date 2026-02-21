@@ -3,7 +3,7 @@
     <div class="hero">
       <div class="hL">
         <div class="hTitle">🔢 Raqamlar</div>
-        <div class="hSub">1–20</div>
+        <div class="hSub">1–10</div>
       </div>
       <button class="playAll" @click="playAll" :disabled="playingAll">
         <span>▶️</span><b>Hammasini ijro etish</b>
