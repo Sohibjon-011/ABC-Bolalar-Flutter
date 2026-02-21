@@ -1,7 +1,7 @@
 {
   "name": "ABC Bolalar",
   "short_name": "ABC",
-  "start_url": "/",
+  "start_url": "/#/abc",
   "display": "standalone",
   "background_color": "#0b0b12",
   "theme_color": "#0b0b12",
