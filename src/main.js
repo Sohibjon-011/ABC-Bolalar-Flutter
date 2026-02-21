@@ -16,14 +16,16 @@ let deferredPrompt = null
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault()
   deferredPrompt = e
-  window.dispatchEvent(new Event('pwa-install-available'))
 })
 
 window.installPWA = async () => {
-  if (!deferredPrompt) return
-  deferredPrompt.prompt()
-  await deferredPrompt.userChoice
-  deferredPrompt = null
+  if (deferredPrompt) {
+    deferredPrompt.prompt()
+    await deferredPrompt.userChoice
+    deferredPrompt = null
+    return 'prompted'
+  }
+  return 'manual'
 }
 
 createApp(App).use(router).mount("#app")

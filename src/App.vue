@@ -32,7 +32,7 @@
     <Toast :items="toasts" />
     <FxOverlay ref="fxRef" />
   </div>
-  <button v-if="showInstall" class="install-btn" @click="install">
+  <button class="install-btn" @click="install">
     📲 Ilovani o‘rnatish
   </button>
 </template>
@@ -83,17 +83,13 @@ const stStyle = (i) => {
   return { left: x + "%", top: y + "%", transform: `translate(-50%,-50%) rotate(${r}deg)`, fontSize: s + "px" }
 }
 
-const showInstall = ref(false)
+const showHelp = ref(false)
 
-onMounted(() => {
-  window.addEventListener('pwa-install-available', () => {
-    showInstall.value = true
-  })
-})
-
-function install() {
-  window.installPWA()
-  showInstall.value = false
+async function install() {
+  const res = await window.installPWA()
+  if (res === 'manual') {
+    showHelp.value = true
+  }
 }
 </script>
 
