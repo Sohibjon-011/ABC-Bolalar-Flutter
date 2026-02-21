@@ -32,13 +32,10 @@
     <Toast :items="toasts" />
     <FxOverlay ref="fxRef" />
   </div>
-  <button class="install-btn" @click="install">
-    📲 Ilovani o‘rnatish
-  </button>
 </template>
 
 <script setup>
-import { computed, ref, provide, onMounted } from "vue"
+import { computed, ref, provide} from "vue"
 import TopBar from "./components/TopBar.vue"
 import TabsNav from "./components/TabsNav.vue"
 import Toast from "./components/Toast.vue"
@@ -82,19 +79,6 @@ const stStyle = (i) => {
   const s = 18 + (i % 6) * 6
   return { left: x + "%", top: y + "%", transform: `translate(-50%,-50%) rotate(${r}deg)`, fontSize: s + "px" }
 }
-
-const showInstall = ref(false)
-
-onMounted(() => {
-  window.addEventListener('pwa-install-available', () => {
-    showInstall.value = true
-  })
-})
-
-function install() {
-  window.installPWA()
-  showInstall.value = false
-}
 </script>
 
 <style>
@@ -115,20 +99,6 @@ body {
 
 button {
   font-family: inherit
-}
-
-.install-btn {
-  position: fixed;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #4f46e5;
-  color: white;
-  padding: 14px 20px;
-  border-radius: 14px;
-  font-size: 16px;
-  border: none;
-  z-index: 9999;
 }
 
 :root {
