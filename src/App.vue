@@ -83,13 +83,17 @@ const stStyle = (i) => {
   return { left: x + "%", top: y + "%", transform: `translate(-50%,-50%) rotate(${r}deg)`, fontSize: s + "px" }
 }
 
-const showHelp = ref(false)
+const showInstall = ref(false)
 
-async function install() {
-  const res = await window.installPWA()
-  if (res === 'manual') {
-    showHelp.value = true
-  }
+onMounted(() => {
+  window.addEventListener('pwa-install-available', () => {
+    showInstall.value = true
+  })
+})
+
+function install() {
+  window.installPWA()
+  showInstall.value = false
 }
 </script>
 
