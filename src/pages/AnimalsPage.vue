@@ -44,6 +44,17 @@ import GameCard from "../components/GameCard.vue"
 import { useAudio } from "../composables/useAudio"
 import { useLevel } from "../composables/useLevel"
 
+import Cat from "../Images/Cat.png"
+import Dog from "../Images/Dog.png"
+import Cow from "../Images/Cow.png"
+import Sheep from "../Images/Sheep.png"
+import Horse from "../Images/Horse.png"
+import Lion from "../Images/Lion.png"
+import Elephant from "../Images/Elephant.png"
+import Rabbit from "../Images/Rabbit.png"
+import Duck from "../Images/Duck.png"
+import Fish from "../Images/Fish.png"
+
 const emit = defineEmits(["toast"])
 const fx = inject("fx")
 const { play, playSequence } = useAudio()
@@ -54,16 +65,16 @@ const startAudio = 50
 const srcOf = (n) => baseAudio + n + ".ogg"
 
 const animals = ref([
-  { id: "cat", big: "😺", emoji: "😺", img: "https://api.removal.ai/download/g2/preview/c40ca4c7-8c79-4750-8a6a-e09cc8480991.png", audio: startAudio + 0 },
-  { id: "dog", big: "🐶", emoji: "🐶", img: "https://api.removal.ai/download/g1/preview/2e1367f5-15d4-4267-bd8e-04c373646128.png", audio: startAudio + 1 },
-  { id: "cow", big: "🐮", emoji: "🐮", img: "https://api.removal.ai/download/g1/preview/46023926-545b-4dba-961e-7a25238cf3d4.png", audio: startAudio + 2 },
-  { id: "sheep", big: "🐑", emoji: "🐑", img: "https://api.removal.ai/download/g3/preview/2f48a62d-d17d-4712-9465-324458b1807e.png", audio: startAudio + 3 },
-  { id: "horse", big: "🐴", emoji: "🐴", img: "https://api.removal.ai/download/g1/preview/49f48e51-7dc2-4dd5-9df4-5d8b73d83233.png", audio: startAudio + 4 },
-  { id: "lion", big: "🦁", emoji: "🦁", img: "https://api.removal.ai/download/g3/preview/0d862ebf-3847-4eb7-ac1a-c41854810862.png", audio: startAudio + 5 },
-  { id: "elephant", big: "🐘", emoji: "🐘", img: "https://api.removal.ai/download/g3/preview/acb9337c-35ad-44e8-9e46-979653be3f5a.png", audio: startAudio + 6 },
-  { id: "rabbit", big: "🐰", emoji: "🐰", img: "https://api.removal.ai/download/g1/preview/7381b8f7-dc8c-4e85-b253-8de91d7c686d.png", audio: startAudio + 7 },
-  { id: "duck", big: "🦆", emoji: "🦆", img: "https://api.removal.ai/download/g4/preview/15f6f5d3-6721-4cc3-bbcc-37a137f5b52a.png", audio: startAudio + 8 },
-  { id: "fish", big: "🐟", emoji: "🐟", img: "https://api.removal.ai/download/g2/preview/aa419df5-dd11-4234-811c-5b6f28d3ecac.png", audio: startAudio + 9 }
+  { id: "cat", big: "😺", emoji: "😺", img: Cat, audio: startAudio + 0 },
+  { id: "dog", big: "🐶", emoji: "🐶", img: Dog, audio: startAudio + 1 },
+  { id: "cow", big: "🐮", emoji: "🐮", img: Cow, audio: startAudio + 2 },
+  { id: "sheep", big: "🐑", emoji: "🐑", img: Sheep, audio: startAudio + 3 },
+  { id: "horse", big: "🐴", emoji: "🐴", img: Horse, audio: startAudio + 4 },
+  { id: "lion", big: "🦁", emoji: "🦁", img: Lion, audio: startAudio + 5 },
+  { id: "elephant", big: "🐘", emoji: "🐘", img: Elephant, audio: startAudio + 6 },
+  { id: "rabbit", big: "🐰", emoji: "🐰", img: Rabbit, audio: startAudio + 7 },
+  { id: "duck", big: "🦆", emoji: "🦆", img: Duck, audio: startAudio + 8 },
+  { id: "fish", big: "🐟", emoji: "🐟", img: Fish, audio: startAudio + 9 }
 ])
 
 const activeId = ref(null)
