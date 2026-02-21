@@ -11,4 +11,19 @@ if ('serviceWorker' in navigator) {
   })
 }
 
+let deferredPrompt = null
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault()
+  deferredPrompt = e
+  window.dispatchEvent(new Event('pwa-install-available'))
+})
+
+window.installPWA = async () => {
+  if (!deferredPrompt) return
+  deferredPrompt.prompt()
+  await deferredPrompt.userChoice
+  deferredPrompt = null
+}
+
 createApp(App).use(router).mount("#app")
