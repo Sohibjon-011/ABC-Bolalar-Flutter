@@ -1,0 +1,37 @@
+name: abc_bolalar
+description: ABC Bolalar - bolalar uchun o'quv o'yinlari.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  provider: ^6.1.2
+  dio: ^5.7.0
+  just_audio: ^0.9.40
+  lottie: ^3.1.3
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "public/MP4/playtime.png"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - src/Images/
+    - public/MP4/
+
