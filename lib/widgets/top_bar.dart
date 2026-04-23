@@ -5,7 +5,10 @@ import '../providers/level_provider.dart';
 import '../providers/theme_provider.dart';
 
 class TopBar extends StatelessWidget {
-  const TopBar({super.key});
+  const TopBar({super.key, this.showLevel = true});
+
+  /// O'rganish bo'limida XP / bosqich; media bo'limida yashirin.
+  final bool showLevel;
 
   @override
   Widget build(BuildContext context) {
@@ -43,15 +46,17 @@ class TopBar extends StatelessWidget {
                   fit: BoxFit.scaleDown,
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'ABC BOLALAR',
+                    'ABC-BOLALAR',
                     style: TextStyle(fontSize: compact ? 16 : 20, fontWeight: FontWeight.w800, color: Colors.white),
                   ),
                 ),
               ),
             ),
             const Spacer(),
-            _LevelPill(level: level),
-            SizedBox(width: compact ? 8 : 12),
+            if (showLevel) ...[
+              _LevelPill(level: level),
+              SizedBox(width: compact ? 8 : 12),
+            ],
             IconButton.filledTonal(
               onPressed: () => theme.toggle(),
               tooltip: theme.themeMode == ThemeMode.dark ? "Kunduzgi rejim" : "Tungi rejim",

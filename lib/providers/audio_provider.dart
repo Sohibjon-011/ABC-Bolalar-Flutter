@@ -27,6 +27,22 @@ class AudioProvider {
     await _playAssetInternal(id, assetPath);
   }
 
+  /// Asset yo'q yoki xato bo'lsa `false` (masalan TTS zaxiraga o'tish uchun).
+  Future<bool> tryPlayAsset(String assetPath) async {
+    final id = ++_cancelId;
+    try {
+      await _player.stop();
+      if (id != _cancelId) return false;
+      await _player.setAudioSource(AudioSource.asset(assetPath));
+      if (id != _cancelId) return false;
+      await _player.setVolume(1);
+      await _player.play();
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
   Future<void> playSequence(
     List<String> assetPaths, {
     void Function(int index)? onStep,
